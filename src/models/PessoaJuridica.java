@@ -6,17 +6,17 @@ public class PessoaJuridica extends Cliente {
         super(nome, contato, endereco, valorIdentificador, IdentificadorUnicoCliente.CNPJ);
 
         if (valorIdentificador.length() != 11) {
-            throw new IllegalArgumentException("O CPF deve ter 14 números!");
+            throw new IllegalArgumentException("O CNPJ deve ter 14 números!");
         }
     }
 
     @Override
     public String toString() {
         return "Pessoa Jurídica {" +
-                "nome='" + nome + '\'' +
-                ", contato=" + contato +
-                ", endereco=" + endereco +
-                ", " + identificadorUnico.toString() + "=" + valorIdentificador +
+                "nome='" + getNome() + '\'' +
+                ", contato=" + getContato() +
+                ", endereco=" + getEndereco() +
+                ", " + getIdentificadorUnico().toString() + "=" + getValorIdentificador() +
                 '}';
     }
 

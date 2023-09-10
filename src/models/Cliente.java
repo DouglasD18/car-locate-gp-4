@@ -2,8 +2,9 @@ package models;
 
 public abstract class Cliente {
 
-    String nome, contato, endereco, valorIdentificador;
-    IdentificadorUnicoCliente identificadorUnico;
+    private String nome, contato, endereco, valorIdentificador;
+
+    private IdentificadorUnicoCliente identificadorUnico;
 
     public Cliente(String nome, String contato, String endereco, String valorIdentificador, IdentificadorUnicoCliente identificadorUnico) {
         this.nome = nome;
@@ -15,6 +16,9 @@ public abstract class Cliente {
 
     public String getNome() {
         return nome;
+    }
+    public IdentificadorUnicoCliente getIdentificadorUnico() {
+        return identificadorUnico;
     }
 
     public String getContato() {
