@@ -58,4 +58,12 @@ public class Locacao {
         return valorFinal;
     }
 
+    public String getIdentificadorLocatario() {
+        return identificadorLocatario;
+    }
+
+    public String getPlaca() {
+        return  this.placa;
+    }
+
 }
