@@ -13,10 +13,10 @@ public class PessoaFisica extends Cliente {
     @Override
     public String toString() {
         return "Pessoa Física {" +
-                "nome='" + nome + '\'' +
-                ", contato=" + contato +
-                ", endereco=" + endereco +
-                ", " + identificadorUnico.toString() + "=" + valorIdentificador +
+                "nome='" + getNome() + '\'' +
+                ", contato=" + getContato() +
+                ", endereco=" + getEndereco() +
+                ", " + getIdentificadorUnico().toString() + "=" + getValorIdentificador() +
                 '}';
     }
 

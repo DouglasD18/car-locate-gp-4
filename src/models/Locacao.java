@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Locacao {
@@ -13,7 +14,6 @@ public class Locacao {
     private Veiculo veiculo;
 
     private LocalDateTime dataDeRetirada;
-    private LocalDateTime dataDeDevolucao;
 
     private double valorBase;
 
@@ -22,11 +22,7 @@ public class Locacao {
         this.locatario = locatario;
         this.veiculo = veiculo;
         this.dataDeRetirada = LocalDateTime.now();
-        if (locatario.getIdentificadorUnico().toString().equals("CPF")) {
-            this.dataDeDevolucao = dataDeRetirada.plusDays(5);
-        } else {
-            this.dataDeDevolucao = dataDeRetirada.plusDays(3);
-        }
+
         if (veiculo.getTipoVeiculo().toString().equals("Pequeno")) {
             this.valorBase = 100.00;
         } else if (veiculo.getTipoVeiculo().toString().equals("Médio")) {
@@ -37,36 +33,32 @@ public class Locacao {
 
     }
 
-    public double devolucao() {
-        //this.dataDeDevolucao = LocalDateTime.now();
-        LocalDate retirada = dataDeRetirada.toLocalDate();
-        LocalDate devolucao = dataDeDevolucao.toLocalDate();
-        Period valor = Period.between(retirada, devolucao);
-        Duration diferenca = Duration.between(retirada, devolucao);
 
+    public double devolucao(LocalDateTime dataDeEntregaReal) {
 
-        long minutos = diferenca.toMinutesPart();
-        int dias = valor.getDays();
+        Duration duracaoLocacao = Duration.between(dataDeRetirada,dataDeEntregaReal);
+        long diasDeLocacao = duracaoLocacao.toDays()+1;
 
         double valorFinal = 0;
 
         if (locatario.getIdentificadorUnico().toString().equals("CPF")) {
-            if (dias >= 5 && minutos > 0) {
-                double valorSemDesconto = valorBase * (dias + 1);
+            if (diasDeLocacao >= 5) {
+                double valorSemDesconto = valorBase * (diasDeLocacao + 1);
                 valorFinal = valorSemDesconto * 0.95;
             } else {
-                valorFinal = valorBase * dias;
+                valorFinal = valorBase * diasDeLocacao;
             }
         } else if (locatario.getIdentificadorUnico().toString().equals("CNPJ")) {
-            if (dias >= 3 && minutos > 0) {
-                double valorSemDesconto = valorBase * (dias + 1);
+            if (diasDeLocacao >= 3 ) {
+                double valorSemDesconto = valorBase * (diasDeLocacao + 1);
                 valorFinal = valorSemDesconto * 0.90;
             } else {
-                valorFinal = valorBase * dias;
+                valorFinal = valorBase * diasDeLocacao;
 
             }
         }
 
         return valorFinal;
     }
+
 }
