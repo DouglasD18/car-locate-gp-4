@@ -1,10 +1,7 @@
 package models;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class Locacao {
