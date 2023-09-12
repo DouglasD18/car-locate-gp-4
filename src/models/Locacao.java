@@ -7,22 +7,22 @@ import java.util.UUID;
 public class Locacao {
 
     private UUID id;
-    private Cliente locatario;
-    private Veiculo veiculo;
+    private String identificadorLocatario;
+    private String placa;
 
     private LocalDateTime dataDeRetirada;
 
     private double valorBase;
 
-    public Locacao(Cliente locatario, Veiculo veiculo) {
+    public Locacao(String identificadorLocatario, String placa) {
         this.id = UUID.randomUUID();
-        this.locatario = locatario;
-        this.veiculo = veiculo;
+        this.identificadorLocatario = identificadorLocatario;
+        this.placa = placa;
         this.dataDeRetirada = LocalDateTime.now();
 
-        if (veiculo.getTipoVeiculo().toString().equals("Pequeno")) {
+        if (placa.equals("Pequeno")) {
             this.valorBase = 100.00;
-        } else if (veiculo.getTipoVeiculo().toString().equals("Médio")) {
+        } else if (placa.equals("Médio")) {
             this.valorBase = 150.00;
         } else {
             this.valorBase = 200;
@@ -38,14 +38,14 @@ public class Locacao {
 
         double valorFinal = 0;
 
-        if (locatario.getIdentificadorUnico().toString().equals("CPF")) {
+        if (identificadorLocatario.equals("CPF")) {
             if (diasDeLocacao >= 5) {
                 double valorSemDesconto = valorBase * (diasDeLocacao + 1);
                 valorFinal = valorSemDesconto * 0.95;
             } else {
                 valorFinal = valorBase * diasDeLocacao;
             }
-        } else if (locatario.getIdentificadorUnico().toString().equals("CNPJ")) {
+        } else if (identificadorLocatario.equals("CNPJ")) {
             if (diasDeLocacao >= 3 ) {
                 double valorSemDesconto = valorBase * (diasDeLocacao + 1);
                 valorFinal = valorSemDesconto * 0.90;
