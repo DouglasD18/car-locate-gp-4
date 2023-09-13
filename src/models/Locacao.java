@@ -66,4 +66,12 @@ public class Locacao {
         return  this.placa;
     }
 
+    @Override
+    public String toString() {
+        return "Locacao{" +
+                "identificador do locatario ='" + identificadorLocatario + '\'' +
+                ", placa do veiculo ='" + placa + '\'' +
+                ", data de locação =" + dataDeRetirada +
+                '}';
+    }
 }
