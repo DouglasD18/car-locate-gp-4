@@ -1,6 +1,8 @@
 package services;
 
+import models.Cliente;
 import models.Locacao;
+import models.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.Scanner;
 public class Menu<ContaDevedora> {
 
     private GerenciamentoLocacao gerenciamentoLocacao = new GerenciamentoLocacao();
+    private GerenciadorDeVeiculos gerenciadorDeVeiculos = new GerenciadorDeVeiculos();
+    private GerenciadorDeClientes gerenciadorDeClientes = new GerenciadorDeClientes();
 
     public int solicitaTrecho(Scanner input, String trecho) {
         try {
@@ -49,15 +53,23 @@ public class Menu<ContaDevedora> {
     }
 
     public boolean clienteExiste(String identificador) {
-        // Irá receber o CNF ou CPNJ  e usar o GerenciadorClientes para ver verificar se existe
+        if (identificador.length() != 11 && identificador.length() != 14) {
+            throw new IllegalArgumentException("O identificador do cliente deve ter 11 ou 14 caracteres!");
+        }
 
-        return true;
+        Cliente cliente = gerenciadorDeClientes.buscar(identificador);
+
+        return cliente != null;
     }
 
     public boolean veiculoExiste(String placa) {
-        // Irá receber a placa  e usar o GerenciadorVeiculos para ver verificar se existe
+        if (placa.length() != 7) {
+            throw new IllegalArgumentException("A placa deve ter 7 caracteres.");
+        }
 
-        return true;
+        Veiculo veiculo = gerenciadorDeVeiculos.buscar(placa);
+
+        return veiculo != null;
     }
 
     public void listarLocacoesPorCliente(String identificador) {
@@ -86,7 +98,16 @@ public class Menu<ContaDevedora> {
         gerenciamentoLocacao.criarLocacao(placa, identificador);
     }
 
-    // public void listarClientes() {}
+    public void listarClientes() {
+        ArrayList<Cliente> clientes = gerenciadorDeClientes.listar();
+
+        if (clientes == null) {
+            System.out.println("Ainda não há clientes cadastrados.");
+        } else {
+            clientes.forEach(cliente -> System.out.println(cliente.toString()));
+        }
+    }
+
     // public void listarVeiculos() {}
     // public void adicionarCliente() {}
     // public void adicionarVeiculo() {}
