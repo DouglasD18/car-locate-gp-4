@@ -108,7 +108,16 @@ public class Menu<ContaDevedora> {
         }
     }
 
-    // public void listarVeiculos() {}
+    public void listarVeiculos() {
+        ArrayList<Veiculo> veiculos = gerenciadorDeVeiculos.listar();
+
+        if (veiculos == null) {
+            System.out.println("Ainda não há clientes cadastrados.");
+        } else {
+            veiculos.forEach(veiculo -> System.out.println(veiculo.toString()));
+        }
+    }
+
     // public void adicionarCliente() {}
     // public void adicionarVeiculo() {}
     // public void pagarLocacao() {}
