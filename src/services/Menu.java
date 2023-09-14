@@ -126,7 +126,11 @@ public class Menu<ContaDevedora> {
         }
     }
 
-    // public void adicionarVeiculo() {}
+    public void adicionarVeiculo(String placa, TipoVeiculo tipoVeiculo) {
+        Veiculo veiculo = new Veiculo(placa, tipoVeiculo);
+        this.gerenciadorDeVeiculos.cadastrar(veiculo);
+    }
+
     // public void pagarLocacao() {}
 
 }
