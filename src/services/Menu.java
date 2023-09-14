@@ -1,8 +1,6 @@
 package services;
 
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+import models.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -118,7 +116,16 @@ public class Menu<ContaDevedora> {
         }
     }
 
-    // public void adicionarCliente() {}
+    public void adicionarCliente(String nome, String contato, String endereco, String valorIdentificador) {
+        if (valorIdentificador.length() == 1) {
+            Cliente cliente = new PessoaFisica(nome, contato, endereco, valorIdentificador);
+            this.gerenciadorDeClientes.cadastrar(cliente);
+        } else {
+            Cliente cliente = new PessoaJuridica(nome, contato, endereco, valorIdentificador);
+            this.gerenciadorDeClientes.cadastrar(cliente);
+        }
+    }
+
     // public void adicionarVeiculo() {}
     // public void pagarLocacao() {}
 
