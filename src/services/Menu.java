@@ -131,6 +131,15 @@ public class Menu<ContaDevedora> {
         this.gerenciadorDeVeiculos.cadastrar(veiculo);
     }
 
-    // public void pagarLocacao() {}
+    public void pagarLocacao(String placa, LocalDateTime dataDeEntregaReal) {
+        Locacao locacao = gerenciamentoLocacao.listarPorVeiculo(placa);
+
+        if (locacao == null) {
+            System.out.println("O veículo não está locado.");
+        } else {
+            System.out.println(locacao.devolucao(dataDeEntregaReal));
+        }
+
+    }
 
 }
