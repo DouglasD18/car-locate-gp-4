@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu<ContaDevedora> {
 
     private GerenciamentoLocacao gerenciamentoLocacao = new GerenciamentoLocacao();
 
@@ -74,7 +74,18 @@ public class Menu {
         locacoes.forEach(locacao -> System.out.println(locacao.toString()));
     }
 
-    // public void criarLocacao() {}
+    public void criarLocacao(String placa, String identificador) {
+        if (!veiculoExiste(placa)) {
+            throw new IllegalArgumentException("O veiculo não existe!");
+        }
+
+        if (!clienteExiste(identificador)) {
+            throw new IllegalArgumentException("O cliente não existe!");
+        }
+
+        gerenciamentoLocacao.criarLocacao(placa, identificador);
+    }
+
     // public void listarClientes() {}
     // public void listarVeiculos() {}
     // public void adicionarCliente() {}
