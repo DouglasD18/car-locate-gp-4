@@ -4,16 +4,14 @@ import models.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-public class Menu<ContaDevedora> {
+public class Menu {
 
     private GerenciamentoLocacao gerenciamentoLocacao = new GerenciamentoLocacao();
     private GerenciadorDeVeiculos gerenciadorDeVeiculos = new GerenciadorDeVeiculos();
     private GerenciadorDeClientes gerenciadorDeClientes = new GerenciadorDeClientes();
 
-    public void listarLocações() {
+    public void listarLocacoes() {
         ArrayList<Locacao> locacoes = gerenciamentoLocacao.listarLocacoes();
 
         if (locacoes.isEmpty()) {
@@ -45,7 +43,7 @@ public class Menu<ContaDevedora> {
 
     public void listarLocacoesPorCliente(String identificador) {
         if (!clienteExiste(identificador)) {
-            throw new IllegalArgumentException("O cliente não existe!");
+            System.out.println("O cliente não existe!");
         }
 
         ArrayList<Locacao> locacoes = gerenciamentoLocacao.listarPorLocatario(identificador);
