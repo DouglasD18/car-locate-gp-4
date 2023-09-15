@@ -41,6 +41,14 @@ public abstract class Cliente {
         return identificadorUnico.toString() + "=" + valorIdentificador;
     }
 
-    public abstract String toString();
-
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", contato='" + contato + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", valor do identificador='" + valorIdentificador + '\'' +
+                ", identificador único=" + identificadorUnico +
+                '}';
+    }
 }

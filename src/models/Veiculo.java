@@ -7,10 +7,6 @@ public class Veiculo {
     private TipoVeiculo tipoVeiculo;
 
     public Veiculo(String placa, TipoVeiculo tipoVeiculo) {
-        if (placa.length() != 7) {
-            throw new IllegalArgumentException("A placa não pode estar vazia");
-        }
-
         this.placa = placa;
         this.estaDisponivel = true;
         this.tipoVeiculo = tipoVeiculo;
@@ -36,7 +32,7 @@ public class Veiculo {
     public String toString() {
         return "Veiculo{" +
                 "placa='" + placa + '\'' +
-                ", estaDisponivel=" + estaDisponivel +
+                ", estaDisponivel='" + estaDisponivel + '\'' +
                 ", tipoVeiculo=" + tipoVeiculo.toString() +
                 '}';
     }
