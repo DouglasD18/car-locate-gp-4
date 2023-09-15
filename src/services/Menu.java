@@ -13,33 +13,6 @@ public class Menu<ContaDevedora> {
     private GerenciadorDeVeiculos gerenciadorDeVeiculos = new GerenciadorDeVeiculos();
     private GerenciadorDeClientes gerenciadorDeClientes = new GerenciadorDeClientes();
 
-    public int solicitaTrecho(Scanner input, String trecho) {
-        try {
-            System.out.printf("Digite o %s da devolução:\n", trecho);
-            int ano = input.nextInt();
-            input.nextLine();
-
-            return ano;
-        } catch (InputMismatchException e) {
-            System.out.printf("O %s deve ser um número inteiro!\n", trecho);
-            return solicitaTrecho(input, trecho);
-        }
-    }
-
-    public LocalDateTime solicitaData(){
-        Scanner input = new Scanner(System.in);
-
-        int ano = solicitaTrecho(input, "ano");
-        int mes = solicitaTrecho(input, "mês");
-        int dia = solicitaTrecho(input, "dia");
-        int hora = solicitaTrecho(input, "hora");
-        int minuto = solicitaTrecho(input, "minuto");
-
-        input.close();
-
-        return LocalDateTime.of(ano, mes, dia, hora, minuto, 0);
-    }
-
     public void listarLocações() {
         ArrayList<Locacao> locacoes = gerenciamentoLocacao.listarLocacoes();
 
@@ -94,6 +67,7 @@ public class Menu<ContaDevedora> {
         }
 
         gerenciamentoLocacao.criarLocacao(placa, identificador);
+        gerenciadorDeVeiculos.setarDisponibilidade(placa, false);
     }
 
     public void listarClientes() {
@@ -137,7 +111,8 @@ public class Menu<ContaDevedora> {
         if (locacao == null) {
             System.out.println("O veículo não está locado.");
         } else {
-            System.out.println(locacao.devolucao(dataDeEntregaReal));
+            System.out.println("Valor pago: " + locacao.devolucao(dataDeEntregaReal));
+            gerenciadorDeVeiculos.setarDisponibilidade(placa, true);
         }
 
     }
